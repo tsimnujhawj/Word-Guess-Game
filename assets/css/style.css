@@ -1,0 +1,14 @@
+
+.changingColor {
+    height: 100%;
+    width: 100%;
+}
+
+@keyframes effects {
+    from {
+        background-color: #F0EDF3;
+    }
+    to {
+        background-color: #CF3273;
+    }
+}
