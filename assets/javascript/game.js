@@ -46,6 +46,9 @@ var words = [
     "Abby Mallard"];
 
     var underScore = [];
+    var rightWord = [];
+    var wrongWord = [];
+
 
 // Choose word randomly
 var randNum = Math.floor(Math.random() * words.length);
@@ -75,10 +78,18 @@ console.log(genUnderscore());
 // Get user's guess
 document.addEventListener("keypress", function(event) {
     var keycode = event.keyCode;
-    console.log(keycode);
-});
-// CHeck if guess is right
+    var keyword = String.fromCharCode(keycode);
+// if user guess is right
+    if (chosenWord.indexOf(keyword) > -1) {
+        console.log(true);
+// add to right words array
+    rightWord.push(keyword);
+    }
+    console.log(keyword);
+    wrongWord.push(keyword);
 
+});
+// Check if guess is right
 
 // if right push to right array
 // f wrong push to wrong array
