@@ -50,8 +50,18 @@ h6 {
 	font-family: 'Open Sans';
 	font-weight: 300;
 	text-align: center;
-	position: absolute;
 	top: 45%;
 	right: 0;
 	left: 0;
+}
+
+.underscore {
+	border: 3px solid #FFFFFF;
+	font-size: 80px;
+	text-align: center;
+	margin: 0 auto;
+	width: 50%;
+	height: 100px;
+	padding-top: 20px;
+	padding-bottom: 0px;
 }

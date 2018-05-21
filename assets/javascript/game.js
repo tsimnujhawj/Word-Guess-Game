@@ -41,7 +41,7 @@ var words = [
     "NegaDuck",
     "Howard the Duck",
     "Yakky Doodle",
-    "County Duckula",
+    "Count Duckula",
     "Quackerjack",
     "Abby Mallard"];
 
@@ -56,16 +56,6 @@ var chosenWord = words[randNum];
 
 console.log(chosenWord);
 
-
-// function calcGuess(userGuess, randWord)
-// { 
-//     var userGuess = event.key;
-// var randWord = words[(Math.random() * words.length)];
-// }
-// document.write(randWord);
-
-
-
 // Create underscores based on word
 var genUnderscore = function() {
     for (var i = 0; i < chosenWord.length; i++) {
@@ -73,22 +63,31 @@ var genUnderscore = function() {
     }
     return underScore;
 }
-
 console.log(genUnderscore());
+
 // Get user's guess
 document.addEventListener("keypress", function(event) {
     var keycode = event.keyCode;
     var keyword = String.fromCharCode(keycode);
+
 // if user guess is right
     if (chosenWord.indexOf(keyword) > -1) {
         console.log(true);
 // add to right words array
     rightWord.push(keyword);
+    console.log(underScore);
+// replace underscor with right letter
+    underScore[chosenWord.indexOf(keyword)] = keyword;
+// checks to see if user word matches
+    if (underScore.join("") == chosenWord) {
+        alert("You win!");
     }
+}
+// add to wrong words array
     console.log(keyword);
     wrongWord.push(keyword);
-
 });
+
 // Check if guess is right
 
 // if right push to right array
