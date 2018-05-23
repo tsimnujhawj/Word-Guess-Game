@@ -21,7 +21,7 @@
 var words = [
     "Mighty Ducks",
     "Donald Duck",
-    "AFKAC Duck",
+    "AFLAC Duck",
     "Daffy Duck",
     "Howard the Duck",
     "Rubber Duckie",
@@ -53,6 +53,7 @@ var words = [
 // Choose word randomly
 var randNum = Math.floor(Math.random() * words.length);
 var chosenWord = words[randNum];
+var underScoreDiv = document.getElementById("underscore");
 
 console.log(chosenWord);
 
@@ -60,8 +61,14 @@ console.log(chosenWord);
 var genUnderscore = function() {
     for (var i = 0; i < chosenWord.length; i++) {
         underScore.push("_");
+        // var underScoreDom = document.createElement("div");
+        // underScoreDom.textContent = underScore[i];
+        // underScoreDiv.appendChild(underScoreDom);
     }
     return underScore;
+    underScoreDiv.textContent(underScore);
+    underScoreDiv.appendChild(underScore)
+    
 }
 console.log(genUnderscore());
 
