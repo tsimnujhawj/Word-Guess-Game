@@ -66,8 +66,9 @@ var genUnderscore = function() {
         // underScoreDiv.appendChild(underScoreDom);
     }
     return underScore;
-    underScoreDiv.textContent(underScore);
-    underScoreDiv.appendChild(underScore)
+    var underScoreDiv = document.getElementById("underscore");
+    underScoreDiv.textContent = underScore;
+    underScoreDiv.appendChild(underScore);
     
 }
 console.log(genUnderscore());
