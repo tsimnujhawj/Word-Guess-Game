@@ -53,7 +53,6 @@ var words = [
 // Choose word randomly
 var randNum = Math.floor(Math.random() * words.length);
 var chosenWord = words[randNum];
-var underScoreDiv = document.getElementById("underscore");
 
 console.log(chosenWord);
 
@@ -64,14 +63,37 @@ var genUnderscore = function() {
         // var underScoreDom = document.createElement("div");
         // underScoreDom.textContent = underScore[i];
         // underScoreDiv.appendChild(underScoreDom);
+
+        // var underScoreDiv = document.getElementById("underscore");
+        // underScoreDiv.textContent = underScore;
+        // underScoreDiv.appendChild(underScore);
     }
     return underScore;
-    var underScoreDiv = document.getElementById("underscore");
-    underScoreDiv.textContent = underScore;
-    underScoreDiv.appendChild(underScore);
     
 }
 console.log(genUnderscore());
+
+// Print underscore based on amount of letters
+
+underScore.forEach(function() {
+    var underScoreDiv = document.createElement("div")
+    underScoreDiv.textContent("_")
+    document.getElementById("underscore").appendChild(underScoreDiv);
+})
+
+
+// underScore.forEach(function(underScore) {
+//     var underScoreDiv = document.createElement("div");
+//     var underScore = document.textContent(underScore);
+//     underScoreDiv.appendChild(underScore);
+//     document.getElementById("underscore").appendChild(underScore); 
+
+//     console.log(underScore);
+//     console.log(underScoreDiv);
+// })
+
+
+
 
 // Get user's guess
 document.addEventListener("keypress", function(event) {
