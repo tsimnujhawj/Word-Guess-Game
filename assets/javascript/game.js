@@ -54,69 +54,43 @@ var words = [
 var randNum = Math.floor(Math.random() * words.length);
 var chosenWord = words[randNum];
 
-console.log(chosenWord);
-
 // Create underscores based on word
 var genUnderscore = function() {
     for (var i = 0; i < chosenWord.length; i++) {
-        underScore.push("_");
-        // var underScoreDom = document.createElement("div");
-        // underScoreDom.textContent = underScore[i];
-        // underScoreDiv.appendChild(underScoreDom);
-
-        // var underScoreDiv = document.getElementById("underscore");
-        // underScoreDiv.textContent = underScore;
-        // underScoreDiv.appendChild(underScore);
+        underScore.push("_ ");
     }
     return underScore;
-    
-}
-console.log(genUnderscore());
+};
 
 // Print underscore based on amount of letters
+var undS = underScore;
+undS.forEach;
 
-underScore.forEach(function() {
-    var underScoreDiv = document.createElement("div")
-    underScoreDiv.textContent("_")
-    document.getElementById("underscore").appendChild(underScoreDiv);
-})
-
-
-// underScore.forEach(function(underScore) {
-//     var underScoreDiv = document.createElement("div");
-//     var underScore = document.textContent(underScore);
-//     underScoreDiv.appendChild(underScore);
-//     document.getElementById("underscore").appendChild(underScore); 
-
-//     console.log(underScore);
-//     console.log(underScoreDiv);
-// })
-
-
-
+document.getElementById("underscore").innerHTML = genUnderscore();
 
 // Get user's guess
-document.addEventListener("keypress", function(event) {
-    var keycode = event.keyCode;
-    var keyword = String.fromCharCode(keycode);
+// 
+// document.addEventListener("keypress", function(event) {
+// var keycode = event.keyCode;
+// var keyword = String.fromCharCode(keycode);
 
-// if user guess is right
-    if (chosenWord.indexOf(keyword) > -1) {
-        console.log(true);
-// add to right words array
-    rightWord.push(keyword);
-    console.log(underScore);
-// replace underscor with right letter
-    underScore[chosenWord.indexOf(keyword)] = keyword;
-// checks to see if user word matches
-    if (underScore.join("") == chosenWord) {
-        alert("You win!");
-    }
-}
-// add to wrong words array
-    console.log(keyword);
-    wrongWord.push(keyword);
-});
+// // if user guess is right
+//     if (chosenWord.indexOf(keyword) > -1) {
+//         console.log(true);
+// // add to right words array
+//     rightWord.push(keyword);
+//     console.log(underScore);
+// // replace underscor with right letter
+//     underScore[chosenWord.indexOf(keyword)] = keyword;
+// // checks to see if user word matches
+//     if (underScore.join("") == chosenWord) {
+//         alert("You win!");
+//     }
+// }
+// // add to wrong words array
+//     console.log(keyword);
+//     wrongWord.push(keyword);
+// });
 
 // Check if guess is right
 
