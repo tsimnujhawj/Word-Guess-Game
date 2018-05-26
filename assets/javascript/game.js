@@ -57,8 +57,10 @@ var chosenWord = words[randNum];
 // Create underscores based on word
 var genUnderscore = function() {
     for (var i = 0; i < chosenWord.length; i++) {
+        // underScore.replace(",", "");
         underScore.push("_ ");
     }
+    
     return underScore;
 };
 
