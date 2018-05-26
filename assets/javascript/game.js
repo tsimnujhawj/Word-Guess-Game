@@ -72,7 +72,7 @@ console.log(genUnderscore());
 
 var underS = genUnderscore();
 
-document.getElementById("underscore").innerHTML = underS;
+document.getElementById("underscore").innerHTML = underS.join(" ");
 
 // Get user's guess
 // 
