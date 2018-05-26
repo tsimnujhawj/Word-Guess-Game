@@ -68,7 +68,11 @@ var genUnderscore = function() {
 var undS = underScore;
 undS.forEach;
 
-document.getElementById("underscore").innerHTML = genUnderscore();
+console.log(genUnderscore());
+
+var underS = genUnderscore();
+
+document.getElementById("underscore").innerHTML = underS;
 
 // Get user's guess
 // 
