@@ -7,6 +7,7 @@ body {
 	-webkit-animation: Gradient 15s ease infinite;
 	-moz-animation: Gradient 15s ease infinite;
 	animation: Gradient 15s ease infinite;
+	text-align: center;
 }
 
 @-webkit-keyframes Gradient {
@@ -53,6 +54,10 @@ h6 {
 	top: 45%;
 	right: 0;
 	left: 0;
+}
+
+.rightGuess, .wrongGuess {
+	margin: 40px;
 }
 
 #underscore {

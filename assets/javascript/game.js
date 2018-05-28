@@ -57,22 +57,13 @@ var chosenWord = words[randNum];
 // Create underscores based on word
 var genUnderscore = function() {
     for (var i = 0; i < chosenWord.length; i++) {
-        // underScore.replace(",", "");
         underScore.push("_ ");
     }
-    
     return underScore;
 };
 
 // Print underscore based on amount of letters
-var undS = underScore;
-undS.forEach;
-
-console.log(genUnderscore());
-
-var underS = genUnderscore();
-
-document.getElementById("underscore").innerHTML = underS.join(" ");
+document.getElementById("underscore").innerHTML = genUnderscore().join(" ");
 
 // Get user's guess
 // 
