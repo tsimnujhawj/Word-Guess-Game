@@ -68,20 +68,28 @@ document.getElementById("underscore").innerHTML = genUnderscore().join(" ");
 
 // Get user's guess
 document.addEventListener("keypress", function() {
-var keycode = event.keyCode;
-console.log(keycode);
+var keyCode = event.key;
+console.log(keyCode);
 
 // });
 
 // // if user guess is right
-    if (chosenWord.indexOf(keyword) > -1) {
-        console.log("True");
+    if (chosenWord.indexOf(keyCode) > -1) {
+
+        // // add to right words array
+        rightWord.push(keyCode);
+        // replace underscore with right letter
+        var guess = keyCode;
+        document.getElementById("underscore").innerHTML = rightWord;
+
+    } else {
+        wrongWord.push(keyCode);
+        document.getElementById("wrongGuessResult").innerHTML = wrongWord.join(" ")
     };
-// // add to right words array
-//     rightWord.push(keyword);
-//     console.log(underScore);
-// // replace underscore with right letter
+
+
 //     underScore[chosenWord.indexOf(keyword)] = keyword;
+
 // // checks to see if user word matches
 //     if (underScore.join("") == chosenWord) {
 //         alert("You win!");
