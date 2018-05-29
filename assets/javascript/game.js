@@ -75,7 +75,7 @@ console.log(keycode);
 
 // // if user guess is right
     if (chosenWord.indexOf(keyword) > -1) {
-        console.log(true);
+        console.log("True");
     };
 // // add to right words array
 //     rightWord.push(keyword);
