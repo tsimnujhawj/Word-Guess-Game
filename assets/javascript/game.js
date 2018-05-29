@@ -74,13 +74,14 @@ console.log(keyCode);
 // });
 
 // // if user guess is right
-    if (chosenWord.indexOf(keyCode) > -1) {
+    // if (chosenWord.indexOf(keyCode) > -1) {
 
-        // // add to right words array
-        rightWord.push(keyCode);
-        // replace underscore with right letter
-        var guess = keyCode;
-        document.getElementById("underscore").innerHTML = rightWord;
+    //     // // add to right words array
+    //     rightWord.push(keyCode);
+    //     // replace underscore with right letter
+        if (keyCode === chosenWord.charAt(keyCode)) {
+
+        document.getElementById("underscore").innerHTML = rightWord.join(" ");
 
     } else {
         wrongWord.push(keyCode);
