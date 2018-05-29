@@ -53,6 +53,7 @@ var words = [
 // Choose word randomly
 var randNum = Math.floor(Math.random() * words.length);
 var chosenWord = words[randNum];
+console.log(chosenWord);
 
 // Create underscores based on word
 var genUnderscore = function() {
@@ -66,18 +67,20 @@ var genUnderscore = function() {
 document.getElementById("underscore").innerHTML = genUnderscore().join(" ");
 
 // Get user's guess
-// 
-// document.addEventListener("keypress", function(event) {
-// var keycode = event.keyCode;
-// var keyword = String.fromCharCode(keycode);
+document.addEventListener("keypress", function() {
+var keycode = event.keyCode;
+console.log(keycode);
+
+// });
 
 // // if user guess is right
-//     if (chosenWord.indexOf(keyword) > -1) {
-//         console.log(true);
+    if (chosenWord.indexOf(keyword) > -1) {
+        console.log(true);
+    };
 // // add to right words array
 //     rightWord.push(keyword);
 //     console.log(underScore);
-// // replace underscor with right letter
+// // replace underscore with right letter
 //     underScore[chosenWord.indexOf(keyword)] = keyword;
 // // checks to see if user word matches
 //     if (underScore.join("") == chosenWord) {
@@ -87,7 +90,7 @@ document.getElementById("underscore").innerHTML = genUnderscore().join(" ");
 // // add to wrong words array
 //     console.log(keyword);
 //     wrongWord.push(keyword);
-// });
+});
 
 // Check if guess is right
 
