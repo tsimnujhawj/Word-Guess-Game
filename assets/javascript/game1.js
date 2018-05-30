@@ -91,6 +91,8 @@
     document.addEventListener("keyup", function() {
     playerGuess = event.key
     console.log(playerGuess);
+    console.log(playerGuess !== answerArray[i])
+    console.log(answerArray)
 
                 // GAME LOOP
     for (var i = 0; i < word.length; i++) {
@@ -104,28 +106,29 @@
             }
 
                 // Alert player if player has already guessed the letter
-            if (playerGuess === answerArray[i]) {
-            document.getElementById("messageBox").innerHTML = "You have already guessed " + playerGuess.toUpperCase() + "!";
+            if (answerArray.includes(playerGuess) === true) {
+            document.getElementById("messageBox").innerHTML = "You have guessed " + playerGuess.toUpperCase() + "!";
             }
 
                 // Player guess is wrong
-            if (word[i] !== playerGuess) {
+            if (answerArray.indexOf(playerGuess) === -1) {
             wrongGuess.push(playerGuess)
             lives--;
-            document.getElementById("messageBox").innerHTML = "Your guess is WRONG!";
-            document.getElementById("wrongGuessResult").innerHTML = wrongGuess.join(" ");
+            document.getElementById("messageBox").innerHTML = "Your guess of " + playerGuess.toUpperCase() + " is WRONG!";
+            document.getElementById("wrongGuessResult").innerHTML = wrongGuess;
             }
 
                 // Check if player has won
-            if (remainingLetters === 0) {
-            document.getElementById("messageBox").innerHTML = "You have WON! Press ENTER to play again!";
-            }
+            // if (word === answerArray) {
+            // document.getElementById("messageBox").innerHTML = "You have WON! Press ENTER to play again!";
+            // }
 
                 // If player's life is 0 then end game
             // if (lives <= 0) {
             // document.getElementById("messageBox").innerHTML = "You have LOST!";
             // }
         }
+        
     }
 )}
 };
