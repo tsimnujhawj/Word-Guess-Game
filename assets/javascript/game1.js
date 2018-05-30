@@ -63,32 +63,60 @@
     "amazing",
     "pancake"
     ];
+ var playerGuess = [];
+ var lives = 10;
+ var wrongGuess = [];
+ var answerArray = [];
 
     // Pick a random word
     var word = words[Math.floor(Math.random() * words.length)];
     console.log(word);
 
     // Set up the answer array
-    var answerArray = [];
     for (var i = 0; i < word.length; i++) {
     answerArray[i] = "_";
-    }
+    };
     var remainingLetters = word.length;
 
-    // Show the player their progress
+    // Show the player their underscore
     document.getElementById("underscore").innerHTML = answerArray.join(" ");
 
-    // Get a guess from the player
-    document.addEventListener("keypress", function() {
+    // Listen for player's guess
+    document.addEventListener("keyup", function() {
     playerGuess = event.key
     console.log(playerGuess);
+                // Check if player has already guessed
+    for (var i = 0; i < word.length; i++) { 
 
-    for (var i = 0; i < word.length; i++) {
-        if (word[i] === playerGuess) {
+                // Check if player's guess is right
+            if (word[i] === playerGuess) {
             answerArray[i] = playerGuess;
             remainingLetters--;
             document.getElementById("underscore").innerHTML = answerArray.join(" ");
-        }
-    }
+            document.getElementById("messageBox").innerHTML = "Your guess is RIGHT!";
+            }
 
-    });
+            if (playerGuess === answerArray[i]) {
+                // Alert player if player has already guessed the letter
+            document.getElementById("messageBox").innerHTML = "You have already guessed " + playerGuess.toUpperCase() + "!";
+            }
+
+                // Player guess is wrong
+            if (word[i] !== playerGuess) {
+            wrongGuess.push(playerGuess)
+            lives--;
+            document.getElementById("messageBox").innerHTML = "Your guess is WRONG!";
+            document.getElementById("wrongGuessResult").innerHTML = wrongGuess.join(" ");
+            }
+
+                // Check if player has won
+            if (remainingLetters === 0) {
+            document.getElementById("messageBox").innerHTML = "You have WON! Press ENTER to play again!";
+            }
+
+                // If player's life is 0 then end game
+            // if (lives <= 0) {
+            // document.getElementById("messageBox").innerHTML = "You have LOST!";
+            // }
+    }
+});
