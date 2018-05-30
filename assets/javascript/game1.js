@@ -86,7 +86,6 @@
     // Show the player their underscore
     document.getElementById("underscore").innerHTML = answerArray.join(" ");
 
-
     // Listen for player's guess
     document.addEventListener("keyup", function() {
     playerGuess = event.key
@@ -95,7 +94,10 @@
     console.log(answerArray)
 
                 // GAME LOOP
+                
     for (var i = 0; i < word.length; i++) {
+
+            document.getElementById("lifeBox").innerHTML = lives;
 
                 // Check if player's guess is right
             if (word[i] === playerGuess) {
@@ -110,14 +112,6 @@
             document.getElementById("messageBox").innerHTML = "You have guessed " + playerGuess.toUpperCase() + "!";
             }
 
-                // Player guess is wrong
-            if (answerArray.indexOf(playerGuess) === -1) {
-            wrongGuess.push(playerGuess)
-            lives--;
-            document.getElementById("messageBox").innerHTML = "Your guess of " + playerGuess.toUpperCase() + " is WRONG!";
-            document.getElementById("wrongGuessResult").innerHTML = wrongGuess;
-            }
-
                 // Check if player has won
             // if (word === answerArray) {
             // document.getElementById("messageBox").innerHTML = "You have WON! Press ENTER to play again!";
@@ -128,7 +122,20 @@
             // document.getElementById("messageBox").innerHTML = "You have LOST!";
             // }
         }
-        
-    }
-)}
+                // Player already guessed wrong
+            if (wrongGuess.includes(playerGuess) === true) {
+            var wrongGuessAlready = true;
+            document.getElementById("messageBox").innerHTML = "Your guess of " + playerGuess.toUpperCase() + " is WRONG!";
+            }
+
+                // Player guessed wrong
+            if (answerArray.indexOf(playerGuess) === -1 && wrongGuessAlready !== true) {
+            wrongGuess.push(playerGuess)
+            lives--;
+            document.getElementById("messageBox").innerHTML = "Your guess of " + playerGuess.toUpperCase() + " is WRONG!";
+            document.getElementById("wrongGuessResult").innerHTML = wrongGuess.join(" ");
+            }
+            return lives;
+        }
+    )}
 };
