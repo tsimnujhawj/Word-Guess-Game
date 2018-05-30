@@ -80,8 +80,12 @@
 
     // Press Space to start
     document.getElementById("underscore").innerHTML = "PRESS SPACE TO START";
+
+    // START OF GAME    
     document.body.onkeyup = function(startGame) {
         if(startGame.keyCode == 32) {
+        
+        var spaceKey = startGame.keyCode;
     
     // Show the player their underscore
     document.getElementById("underscore").innerHTML = answerArray.join(" ");
@@ -90,8 +94,10 @@
     document.addEventListener("keyup", function() {
     playerGuess = event.key
     console.log(playerGuess);
-    console.log(playerGuess !== answerArray[i])
-    console.log(answerArray)
+    console.log(remainingLetters);
+    console.log(answerArray);
+    console.log(word[i]);
+
 
                 // GAME LOOP
                 
@@ -100,28 +106,34 @@
             document.getElementById("lifeBox").innerHTML = lives;
 
                 // Check if player's guess is right
-            if (word[i] === playerGuess) {
+            if (word[i].includes(playerGuess) && rightGuessAlready !== true) {
             answerArray[i] = playerGuess;
             remainingLetters--;
             document.getElementById("underscore").innerHTML = answerArray.join(" ");
             document.getElementById("messageBox").innerHTML = "Your guess is RIGHT!";
             }
-
+            
                 // Alert player if player has already guessed the letter
-            if (answerArray.includes(playerGuess) === true) {
+            else if (rightGuessAlready === true) {
+            var rightGuessAlready = true;
             document.getElementById("messageBox").innerHTML = "You have guessed " + playerGuess.toUpperCase() + "!";
             }
 
                 // Check if player has won
-            // if (word === answerArray) {
-            // document.getElementById("messageBox").innerHTML = "You have WON! Press ENTER to play again!";
-            // }
+            else if (remainingLetters === 0) {
+            document.getElementById("messageBox").innerHTML = "You have WON! Press ENTER to play again!";
+            }
 
+            
                 // If player's life is 0 then end game
-            // if (lives <= 0) {
-            // document.getElementById("messageBox").innerHTML = "You have LOST!";
-            // }
-        }
+            else if (lives <= 0) {
+            document.getElementById("messageBox").innerHTML = "You have LOST!";
+            }
+
+        } // END OF GAME FOR LOOP
+
+
+
                 // Player already guessed wrong
             if (wrongGuess.includes(playerGuess) === true) {
             var wrongGuessAlready = true;
@@ -136,6 +148,7 @@
             document.getElementById("wrongGuessResult").innerHTML = wrongGuess.join(" ");
             }
             return lives;
-        }
-    )}
-};
+
+        } // END OF EVENTLISTENER FUNCTION
+    )} // END OF PRESS SPACE TO START
+}; // END OF START GAME FUNCTION
