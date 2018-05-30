@@ -78,28 +78,22 @@
     };
     var remainingLetters = word.length;
 
+    // Press Space to start
+    document.getElementById("underscore").innerHTML = "PRESS SPACE TO START";
+    document.body.onkeyup = function(startGame) {
+        if(startGame.keyCode == 32) {
+    
     // Show the player their underscore
     document.getElementById("underscore").innerHTML = answerArray.join(" ");
+
 
     // Listen for player's guess
     document.addEventListener("keyup", function() {
     playerGuess = event.key
     console.log(playerGuess);
-                // Check if player has already guessed
-    for (var i = 0; i < word.length; i++) { 
 
-                // Check if player's guess is right
-            if (word[i] === playerGuess) {
-            answerArray[i] = playerGuess;
-            remainingLetters--;
-            document.getElementById("underscore").innerHTML = answerArray.join(" ");
-            document.getElementById("messageBox").innerHTML = "Your guess is RIGHT!";
-            }
-
-            if (playerGuess === answerArray[i]) {
-                // Alert player if player has already guessed the letter
-            document.getElementById("messageBox").innerHTML = "You have already guessed " + playerGuess.toUpperCase() + "!";
-            }
+                // GAME LOOP
+    for (var i = 0; i < word.length; i++) {
 
                 // Player guess is wrong
             if (word[i] !== playerGuess) {
@@ -109,8 +103,21 @@
             document.getElementById("wrongGuessResult").innerHTML = wrongGuess.join(" ");
             }
 
+                // Alert player if player has already guessed the letter
+            else if (playerGuess === answerArray[i]) {
+            document.getElementById("messageBox").innerHTML = "You have already guessed " + playerGuess.toUpperCase() + "!";
+            }
+
+                // Check if player's guess is right
+            else if (word[i] === playerGuess) {
+            answerArray[i] = playerGuess;
+            remainingLetters--;
+            document.getElementById("underscore").innerHTML = answerArray.join(" ");
+            document.getElementById("messageBox").innerHTML = "Your guess is RIGHT!";
+            }
+
                 // Check if player has won
-            if (remainingLetters === 0) {
+            else if (remainingLetters === 0) {
             document.getElementById("messageBox").innerHTML = "You have WON! Press ENTER to play again!";
             }
 
@@ -118,5 +125,8 @@
             // if (lives <= 0) {
             // document.getElementById("messageBox").innerHTML = "You have LOST!";
             // }
+
     }
-});
+}
+
+)}};
