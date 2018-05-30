@@ -58,40 +58,59 @@ console.log(chosenWord);
 // GAME LOOP //
 
 // Create underscores based on word
-var genUnderscore = function() {
-    for (var i = 0; i < chosenWord.length; i++) {
-        underScore.push("_ ");
-    }
-    return underScore;
-};
+// var genUnderscore = function() {
+//     for (var i = 0; i < chosenWord.length; i++) {
+//         underScore.push("_ ");
+//     }
+//     return underScore;
+// };
+
+var answerArray = [];
+for (var i = 0; i < chosenWord.length; i++) {
+    answerArray[i] = "_";
+}
+var remainingLetters = chosenWord.length;
 
 // Print underscore based on amount of letters
 // var remainingLetters = chosenWord.length;
-// while (remainingLetters > 0) {
-document.getElementById("underscore").innerHTML = genUnderscore().join(" ");
-// }
+while (remainingLetters > 0) {
+document.getElementById("underscore").innerHTML = answerArray.join(" ");
+document.addEventListener("keypress", function() {
+    var keyCode = event.key;
+}
 
 // Get user's guess
-document.addEventListener("keypress", function() {
-var keyCode = event.key;
-console.log(keyCode);
+// document.addEventListener("keypress", function() {
+// var keyCode = event.key;
+// console.log(keyCode);
 
 // });
 
+for (var i = 0; i < chosenWord.length; i++) {
+    if (chosenWord[i] === keyCode) {
+        answerArray[i] = keyCode;
+        remainingLetters--;
+    }
+}
+
+// while (remainingLetters > 0) {
+//     document.getElementById("underscore").innerHTML = answerArray.join(" ");
+// }
+
 // // if user guess is right
-    if (chosenWord.indexOf(keyCode) > -1) {
+    // if (chosenWord.indexOf(keyCode) > -1) {
 
-    //     // // add to right words array
-        rightWord.push(keyCode);
-    //     // replace underscore with right letter
-        // if (keyCode === chosenWord.charAt(keyCode)) {
+    // //     // // add to right words array
+    //     rightWord.push(keyCode);
+    // //     // replace underscore with right letter
+    //     // if (keyCode === chosenWord.charAt(keyCode)) {
 
-        document.getElementById("underscore").innerHTML = rightWord.join(" ");
+    //     document.getElementById("underscore").innerHTML = rightWord.join(" ");
 
-    } else {
-        wrongWord.push(keyCode);
-        document.getElementById("wrongGuessResult").innerHTML = wrongWord.join(" ")
-    };
+    // } else {
+    //     wrongWord.push(keyCode);
+    //     document.getElementById("wrongGuessResult").innerHTML = wrongWord.join(" ")
+    // };
 
 
 //     underScore[chosenWord.indexOf(keyword)] = keyword;
