@@ -67,10 +67,12 @@
  var lives = 10;
  var wrongGuess = [];
  var answerArray = [];
+ var wins = 0;
+ var losses = 0;
+ var rightGuessAlready = [];
 
     // Pick a random word
     var word = words[Math.floor(Math.random() * words.length)];
-    console.log(word);
 
     // Set up the answer array
     for (var i = 0; i < word.length; i++) {
@@ -82,7 +84,7 @@
     document.getElementById("underscore").innerHTML = "PRESS SPACE TO START";
 
     // START OF GAME    
-    document.body.onkeyup = function(startGame) {
+    document.body.onkeyup = function game(startGame) {
         if(startGame.keyCode == 32) {
         
         var spaceKey = startGame.keyCode;
@@ -96,7 +98,8 @@
     console.log(playerGuess);
     console.log(remainingLetters);
     console.log(answerArray);
-    console.log(word[i]);
+    console.log(word);
+    console.log(rightGuessAlready);
 
 
                 // GAME LOOP
@@ -104,38 +107,57 @@
     for (var i = 0; i < word.length; i++) {
 
             document.getElementById("lifeBox").innerHTML = lives;
+            document.getElementById("winsBox").innerHTML = wins;
+            document.getElementById("lossesBox").innerHTML = losses;
 
                 // Check if player's guess is right
-            if (word[i].includes(playerGuess) && rightGuessAlready !== true) {
+            if (word[i].includes(playerGuess)) {
+            rightGuessAlready.push(playerGuess);
             answerArray[i] = playerGuess;
             remainingLetters--;
             document.getElementById("underscore").innerHTML = answerArray.join(" ");
             document.getElementById("messageBox").innerHTML = "Your guess is RIGHT!";
+            // evalGuess();
+            checkWin();
             }
             
                 // Alert player if player has already guessed the letter
-            else if (rightGuessAlready === true) {
-            var rightGuessAlready = true;
+            else if (rightGuessAlready.indexOf(playerGuess) === -1) {
             document.getElementById("messageBox").innerHTML = "You have guessed " + playerGuess.toUpperCase() + "!";
-            }
-
-                // Check if player has won
-            else if (remainingLetters === 0) {
-            document.getElementById("messageBox").innerHTML = "You have WON! Press ENTER to play again!";
-            }
-
-            
-                // If player's life is 0 then end game
-            else if (lives <= 0) {
-            document.getElementById("messageBox").innerHTML = "You have LOST!";
             }
 
         } // END OF GAME FOR LOOP
 
+                // Evaluate if letter has already been guessed
+            function evalGuess(playerGuess) {
+            var positions = [];
+            for (var i = 0; i < word.length; i++) {
+            if (word[i] === playerGuess) {
+                positions.push(i);
+                    }
+                }
+            }
 
+                // Check if player has won
+            function checkWin() {
+            if (remainingLetters === 0) {
+            document.getElementById("messageBox").innerHTML = "You have WON! Press ENTER to play again!";
+            wins++;
+            console.log("Wins " + wins);
+                }
+            }
+
+                // Check if player has lost
+            function checkLost() {
+            if (lives <= 0) {
+            document.getElementById("messageBox").innerHTML = "You have LOST! Press ENTER to play again!";
+            losses++;
+            console.log("Losses " + losses);
+                }
+            }
 
                 // Player already guessed wrong
-            if (wrongGuess.includes(playerGuess) === true) {
+            if (wrongGuess.includes(playerGuess) === true || event.keyCode === 32) {
             var wrongGuessAlready = true;
             document.getElementById("messageBox").innerHTML = "Your guess of " + playerGuess.toUpperCase() + " is WRONG!";
             }
@@ -146,6 +168,7 @@
             lives--;
             document.getElementById("messageBox").innerHTML = "Your guess of " + playerGuess.toUpperCase() + " is WRONG!";
             document.getElementById("wrongGuessResult").innerHTML = wrongGuess.join(" ");
+            checkLost();
             }
             return lives;
 
