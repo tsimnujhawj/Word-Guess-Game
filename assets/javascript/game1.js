@@ -117,26 +117,52 @@
             remainingLetters--;
             document.getElementById("underscore").innerHTML = answerArray.join(" ");
             document.getElementById("messageBox").innerHTML = "Your guess is RIGHT!";
-            // evalGuess();
+            var x = rightGuessAlready.indexOf(playerGuess[0]);
             checkWin();
+            } else if (x >= 0) {
+                var guessedLetter = true;
             }
-            
-                // Alert player if player has already guessed the letter
-            else if (rightGuessAlready.indexOf(playerGuess) === -1) {
-            document.getElementById("messageBox").innerHTML = "You have guessed " + playerGuess.toUpperCase() + "!";
-            }
+
+            //     // Alert player if player has already guessed the letter
+            // else if (rightGuessAlready.indexOf(playerGuess) === -1) {
+            // document.getElementById("messageBox").innerHTML = "You have guessed " + playerGuess.toUpperCase() + "!";
+            // }
 
         } // END OF GAME FOR LOOP
 
                 // Evaluate if letter has already been guessed
-            function evalGuess(playerGuess) {
-            var positions = [];
-            for (var i = 0; i < word.length; i++) {
-            if (word[i] === playerGuess) {
-                positions.push(i);
-                    }
+        //     function evalGuess(playerGuess) {
+        //     var count = [];
+        //     var occurances = word.indexOf(playerGuess);
+        //     var countGuess = word.split(playerGuess).length - 1;
+        //     var countGuess2 = answerArray.split(playerGuess).length - 1;
+        //     console.log("In position " + occurances);
+        //     console.log("Occured: " + countGuess);
+        //     console.log("Occured 2: " + countGuess2);
+        //     if (countGuess === answerArray[i]) {
+        //     console.log("Occured: " + countGuess)
+
+        //     forEach()
+        //     }
+        // }
+
+        function getFrequency(string) {
+            var countGuess = word.split(playerGuess).length - 1;
+            var x = rightGuessAlready.length([playerGuess]);
+            var freq = [];
+            for (var i=0; i < string.length; i++) {
+                var character = string.charAt(i);
+                if (freq[character]) {
+                   freq[character]++;
+                } else {
+                   freq[character] = 1;
                 }
             }
+            console.log("Freq:" + freq.length)
+            if (freq.length === countGuess) {
+                console.log("You did it!")
+            }
+        };
 
                 // Check if player has won
             function checkWin() {
