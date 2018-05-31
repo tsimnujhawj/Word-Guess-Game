@@ -117,10 +117,7 @@
             remainingLetters--;
             document.getElementById("underscore").innerHTML = answerArray.join(" ");
             document.getElementById("messageBox").innerHTML = "Your guess is RIGHT!";
-            var x = rightGuessAlready.indexOf(playerGuess[0]);
             checkWin();
-            } else if (x >= 0) {
-                var guessedLetter = true;
             }
 
             //     // Alert player if player has already guessed the letter
@@ -145,24 +142,6 @@
         //     forEach()
         //     }
         // }
-
-        function getFrequency(string) {
-            var countGuess = word.split(playerGuess).length - 1;
-            var x = rightGuessAlready.length([playerGuess]);
-            var freq = [];
-            for (var i=0; i < string.length; i++) {
-                var character = string.charAt(i);
-                if (freq[character]) {
-                   freq[character]++;
-                } else {
-                   freq[character] = 1;
-                }
-            }
-            console.log("Freq:" + freq.length)
-            if (freq.length === countGuess) {
-                console.log("You did it!")
-            }
-        };
 
                 // Check if player has won
             function checkWin() {
