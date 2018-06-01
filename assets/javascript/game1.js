@@ -63,120 +63,153 @@
     "amazing",
     "pancake"
     ];
+
+ var word = "";
  var playerGuess = [];
  var lives = 10;
  var wrongGuess = [];
  var answerArray = [];
  var wins = 0;
  var losses = 0;
- var rightGuessAlready = [];
+ var lettersGuessed = {
+     cache: []
+ };
+ var setState = "dead";
+
+// Begin the game
+window.onload = document.getElementById("underscore").innerHTML = "Category: Famous ducks";
+
+//Begin function
+function begin() {
+setState = "play";
+gameStart()
+}
+
+// GAME LOOP
+function gameStart() {
+if (setState === "play") {
+
+answerArray = [];
+lives = 10;
+wrongGuess = [];
+lettersGuessed = {
+cache: [],
+};
+
 
     // Pick a random word
-    var word = words[Math.floor(Math.random() * words.length)];
+    word = words[Math.floor(Math.random() * words.length)];
 
-    // Set up the answer array
-    for (var i = 0; i < word.length; i++) {
-    answerArray[i] = "_";
-    };
-    var remainingLetters = word.length;
-
-    // Press Space to start
-    document.getElementById("underscore").innerHTML = "PRESS SPACE TO START";
-
-    // START OF GAME    
-    document.body.onkeyup = function game(startGame) {
-        if(startGame.keyCode == 32) {
-        
-        var spaceKey = startGame.keyCode;
+        // Set up the answer array
+        for (var i = 0; i < word.length; i++) {
+        answerArray[i] = "_";
+        };
+    }
     
-    // Show the player their underscore
-    document.getElementById("underscore").innerHTML = answerArray.join(" ");
+    else { // DEAD STATE
+    document.getElementById("messageBox").innerHTML = "Click PLAY";
+    }
+
+document.getElementById("underscore").innerHTML = answerArray.join(" ");
+document.getElementById("lifeBox").innerHTML = lives;
+document.getElementById("winsBox").innerHTML = wins;
+document.getElementById("lossesBox").innerHTML = losses;
+
+    console.log(playerGuess)
+    console.log(answerArray)
+    console.log(lettersGuessed)
+    console.log(word)
+    console.log(wrongGuess)
+};
+
+
+// Check if player has won
+function checkWin() {
+    if (answerArray.indexOf("_") === -1) {
+    setState = "dead"
+    wins++;
+    document.getElementById("winsBox").innerHTML = wins;
+    document.getElementById("messageBox").innerHTML = "You WON!";
+    gameStart()
+    } else {
+
+    }
+}
+
+    // // Check if player has lost
+    // function checkLost() {
+    //     if (lives <= 0) {
+    //     document.getElementById("messageBox").innerHTML = "You have LOST! Press ENTER to play again!";
+    //     losses++;
+    //     console.log("Losses " + losses);
+    //         } else {
+    //             wrongGuess.push(playerGuess);
+    //             document.getElementById("wrongGuessResult").innerHTML = wrongGuess.join(" ");
+    //             document.getElementById("messageBox").innerHTML = "Your guess is WRONG!";
+    //             lives--;
+    //         }
+    //     }
+
+
 
     // Listen for player's guess
     document.addEventListener("keyup", function() {
-    playerGuess = event.key
-    console.log(playerGuess);
-    console.log(remainingLetters);
-    console.log(answerArray);
-    console.log(word);
-    console.log(rightGuessAlready);
+        playerGuess = event.key.toLowerCase();
 
+        // Check if guess is wrong
+        if (word.includes(playerGuess) === false) {
+            wrongGuess = playerGuess;
+            document.getElementById("wrongGuessResult").innerHTML = wrongGuess;
+            document.getElementById("messageBox").innerHTML = "Your guess is WRONG!";
+            console.log(word.includes(playerGuess));
+        }
 
-                // GAME LOOP
-                
     for (var i = 0; i < word.length; i++) {
-
-            document.getElementById("lifeBox").innerHTML = lives;
-            document.getElementById("winsBox").innerHTML = wins;
-            document.getElementById("lossesBox").innerHTML = losses;
 
                 // Check if player's guess is right
             if (word[i].includes(playerGuess)) {
-            rightGuessAlready.push(playerGuess);
+            lettersGuessed.cache.push(playerGuess);
             answerArray[i] = playerGuess;
-            remainingLetters--;
             document.getElementById("underscore").innerHTML = answerArray.join(" ");
-            document.getElementById("messageBox").innerHTML = "Your guess is RIGHT!";
+            document.getElementById("messageBox").innerHTML = "You have guessed RIGHT!";
             checkWin();
-            }
+            };
 
-            //     // Alert player if player has already guessed the letter
-            // else if (rightGuessAlready.indexOf(playerGuess) === -1) {
-            // document.getElementById("messageBox").innerHTML = "You have guessed " + playerGuess.toUpperCase() + "!";
-            // }
 
-        } // END OF GAME FOR LOOP
-
-                // Evaluate if letter has already been guessed
-        //     function evalGuess(playerGuess) {
-        //     var count = [];
-        //     var occurances = word.indexOf(playerGuess);
-        //     var countGuess = word.split(playerGuess).length - 1;
-        //     var countGuess2 = answerArray.split(playerGuess).length - 1;
-        //     console.log("In position " + occurances);
-        //     console.log("Occured: " + countGuess);
-        //     console.log("Occured 2: " + countGuess2);
-        //     if (countGuess === answerArray[i]) {
-        //     console.log("Occured: " + countGuess)
-
-        //     forEach()
-        //     }
-        // }
-
-                // Check if player has won
-            function checkWin() {
-            if (remainingLetters === 0) {
-            document.getElementById("messageBox").innerHTML = "You have WON! Press ENTER to play again!";
-            wins++;
-            console.log("Wins " + wins);
-                }
-            }
-
-                // Check if player has lost
-            function checkLost() {
-            if (lives <= 0) {
-            document.getElementById("messageBox").innerHTML = "You have LOST! Press ENTER to play again!";
-            losses++;
-            console.log("Losses " + losses);
-                }
-            }
+            // document.addEventListener("keyup", function () {
+            //     if(event.keyCode == 13) {
+            //     gameStart();
+            // }})
 
                 // Player already guessed wrong
-            if (wrongGuess.includes(playerGuess) === true || event.keyCode === 32) {
-            var wrongGuessAlready = true;
-            document.getElementById("messageBox").innerHTML = "Your guess of " + playerGuess.toUpperCase() + " is WRONG!";
-            }
+            // if (wrongGuess.includes(playerGuess) === true) {
+            // var wrongGuessAlready = true;
+            // document.getElementById("messageBox").innerHTML = "Your guess of " + playerGuess.toUpperCase() + " is WRONG!";
+            // }
 
-                // Player guessed wrong
-            if (answerArray.indexOf(playerGuess) === -1 && wrongGuessAlready !== true) {
-            wrongGuess.push(playerGuess)
-            lives--;
-            document.getElementById("messageBox").innerHTML = "Your guess of " + playerGuess.toUpperCase() + " is WRONG!";
-            document.getElementById("wrongGuessResult").innerHTML = wrongGuess.join(" ");
-            checkLost();
-            }
-            return lives;
+            //     // Player guessed wrong
+            // if (answerArray.indexOf(playerGuess) === -1 && wrongGuessAlready !== true) {
+            // wrongGuess.push(playerGuess)
+            // lives--;
+            // document.getElementById("messageBox").innerHTML = "Your guess of " + playerGuess.toUpperCase() + " is WRONG!";
+            // document.getElementById("wrongGuessResult").innerHTML = wrongGuess.join(" ");
+            // checkLost();
+            // }
 
-        } // END OF EVENTLISTENER FUNCTION
-    )} // END OF PRESS SPACE TO START
-}; // END OF START GAME FUNCTION
+            // if (wrongGuess.includes(playerGuess) === true) {
+            //     var wrongGuessAlready = true;
+            //     document.getElementById("messageBox").innerHTML = "Your guess is WRONG!";
+            //     }
+            
+            //     // Player guessed wrong
+            //     else if (answerArray.indexOf(playerGuess) === -1 && wrongGuessAlready !== true) {
+            //     wrongGuess.push(playerGuess)
+            //     lives--;
+            //     document.getElementById("messageBox").innerHTML = "Your guess is WRONG!";
+            //     document.getElementById("wrongGuessResult").innerHTML = wrongGuess.join(" ");
+            //     // checkLost();
+            //     }
+
+        }
+    
+});
