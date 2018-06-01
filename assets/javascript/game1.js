@@ -1,69 +1,33 @@
-// Create an array of Words
-// var words = [
-//     "Mighty Ducks",
-//     "Donald Duck",
-//     "AFLAC Duck",
-//     "Daffy Duck",
-//     "Howard the Duck",
-//     "Rubber Duckie",
-//     "Plucky Duck",
-//     "Daisy Duck",
-//     "Darkwing Duck",
-//     "Scrooge McDuck",
-//     "Ludwig Von Drake",
-//     "Della Duck",
-//     "Baby Huey",
-//     "Melissa Duck",
-//     "Huey",
-//     "Dewey",
-//     "Louie",
-//     "Launchpad McQuack",
-//     "Webby Vanderquack",
-//     "NegaDuck",
-//     "Howard the Duck",
-//     "Yakky Doodle",
-//     "Count Duckula",
-//     "Quackerjack",
-//     "Abby Mallard"];
-
-//     var underScore = [];
-//     var rightWord = [];
-//     var wrongWord = [];
 
 
-// // Choose word randomly
-// var randNum = Math.floor(Math.random() * words.length);
-// var chosenWord = words[randNum];
-// console.log(chosenWord);
-
-// // Set up the answer array
-// var answerArray = [];
-// for (var i = 0; i < chosenWord.length; i++) {
-//     answerArray[i] = "_";
-// }
-// var remainingLetters = chosenWord.length;
-
-// // GAME LOOP //
-// while (remainingLetters > 0) {
-//     // Print underscore based on amount of letters
-// document.getElementById("underscore").innerHTML = answerArray.join(" ");
-//     // Listens for keypress
-// document.addEventListener("keypress", function() {
-//     var keyCode = event.key;
-//     if (chosenWord[i] === keyCode) {
-//         answerArray[i] = keyCode;
-//         remainingLetters--;
-    
-//     }})};
 
     // Create an array of words
  var words = [
-    "javascript",
-    "monkey",
-    "amazing",
-    "pancake"
-    ];
+    "mighty",
+    "donald",
+    "aflac",
+    "daffy",
+    "howard",
+    "rubberduckie",
+    "plucky",
+    "daisy",
+    "darkwing",
+    "scroogemcduck",
+    "ludwigvondrake",
+    "della",
+    "huey",
+    "dewey",
+    "louie",
+    "launchpadmcquack",
+    "webbyvanderquack",
+    "negaduck",
+    "yakkydoodle",
+    "countduckula",
+    "quackerjack",
+    "abbymallard"
+];
 
+// Global variables inital set
  var word = "";
  var playerGuess = [];
  var lives = 10;
@@ -82,10 +46,11 @@ window.onload = document.getElementById("underscore").innerHTML = "Category: Fam
 //Begin function
 function begin() {
 setState = "play";
+document.getElementById("messageBox").innerHTML = "Press a KEY to guess!";
 gameStart()
 }
 
-// GAME LOOP
+// Start game and set variables/objects/arrays
 function gameStart() {
 if (setState === "play") {
 
@@ -97,29 +62,25 @@ cache: [],
 };
 
 
-    // Pick a random word
-    word = words[Math.floor(Math.random() * words.length)];
+        // Pick a random word
+        word = words[Math.floor(Math.random() * words.length)];
 
         // Set up the answer array
         for (var i = 0; i < word.length; i++) {
         answerArray[i] = "_";
         };
     }
-    
-    else { // DEAD STATE
-    document.getElementById("messageBox").innerHTML = "Click PLAY";
+
+    // DEAD STATE after win
+    else {
+        document.getElementById("messageBox").innerHTML = "You WON! Click PLAY!";
     }
 
+// Display of Player's stats
 document.getElementById("underscore").innerHTML = answerArray.join(" ");
 document.getElementById("lifeBox").innerHTML = lives;
 document.getElementById("winsBox").innerHTML = wins;
 document.getElementById("lossesBox").innerHTML = losses;
-
-    console.log(playerGuess)
-    console.log(answerArray)
-    console.log(lettersGuessed)
-    console.log(word)
-    console.log(wrongGuess)
 };
 
 
@@ -129,44 +90,38 @@ function checkWin() {
     setState = "dead"
     wins++;
     document.getElementById("winsBox").innerHTML = wins;
-    document.getElementById("messageBox").innerHTML = "You WON!";
     gameStart()
-    } else {
-
     }
 }
 
-    // // Check if player has lost
-    // function checkLost() {
-    //     if (lives <= 0) {
-    //     document.getElementById("messageBox").innerHTML = "You have LOST! Press ENTER to play again!";
-    //     losses++;
-    //     console.log("Losses " + losses);
-    //         } else {
-    //             wrongGuess.push(playerGuess);
-    //             document.getElementById("wrongGuessResult").innerHTML = wrongGuess.join(" ");
-    //             document.getElementById("messageBox").innerHTML = "Your guess is WRONG!";
-    //             lives--;
-    //         }
-    //     }
-
-
+// Check if player has lost
+function checkLost() {
+    if (lives <= 0) {
+    document.getElementById("messageBox").innerHTML = "You have LOST! Press PLAY!";
+    losses++;
+    setState = "dead";
+        }
+    }
 
     // Listen for player's guess
     document.addEventListener("keyup", function() {
         playerGuess = event.key.toLowerCase();
+        // Will only accept keys if in PLAY state
+        if (setState === "play") {
 
         // Check if guess is wrong
         if (word.includes(playerGuess) === false) {
-            wrongGuess = playerGuess;
-            document.getElementById("wrongGuessResult").innerHTML = wrongGuess;
+            wrongGuess.push(playerGuess);
+            document.getElementById("wrongGuessResult").innerHTML = wrongGuess.join(" ");
             document.getElementById("messageBox").innerHTML = "Your guess is WRONG!";
-            console.log(word.includes(playerGuess));
+            lives--;
+            document.getElementById("lifeBox").innerHTML = lives;
+            checkLost();
         }
 
+        // Check if player's guess is right with FOR LOOP to cycle word letters
     for (var i = 0; i < word.length; i++) {
 
-                // Check if player's guess is right
             if (word[i].includes(playerGuess)) {
             lettersGuessed.cache.push(playerGuess);
             answerArray[i] = playerGuess;
@@ -175,41 +130,6 @@ function checkWin() {
             checkWin();
             };
 
-
-            // document.addEventListener("keyup", function () {
-            //     if(event.keyCode == 13) {
-            //     gameStart();
-            // }})
-
-                // Player already guessed wrong
-            // if (wrongGuess.includes(playerGuess) === true) {
-            // var wrongGuessAlready = true;
-            // document.getElementById("messageBox").innerHTML = "Your guess of " + playerGuess.toUpperCase() + " is WRONG!";
-            // }
-
-            //     // Player guessed wrong
-            // if (answerArray.indexOf(playerGuess) === -1 && wrongGuessAlready !== true) {
-            // wrongGuess.push(playerGuess)
-            // lives--;
-            // document.getElementById("messageBox").innerHTML = "Your guess of " + playerGuess.toUpperCase() + " is WRONG!";
-            // document.getElementById("wrongGuessResult").innerHTML = wrongGuess.join(" ");
-            // checkLost();
-            // }
-
-            // if (wrongGuess.includes(playerGuess) === true) {
-            //     var wrongGuessAlready = true;
-            //     document.getElementById("messageBox").innerHTML = "Your guess is WRONG!";
-            //     }
-            
-            //     // Player guessed wrong
-            //     else if (answerArray.indexOf(playerGuess) === -1 && wrongGuessAlready !== true) {
-            //     wrongGuess.push(playerGuess)
-            //     lives--;
-            //     document.getElementById("messageBox").innerHTML = "Your guess is WRONG!";
-            //     document.getElementById("wrongGuessResult").innerHTML = wrongGuess.join(" ");
-            //     // checkLost();
-            //     }
-
         }
     
-});
+}});
